@@ -46,7 +46,7 @@ export default function Home() {
       ) : loading ? (
         <Loading />
       ) : (
-        <div className="">
+        <div className="flex flex-col gap-[10vh]">
           {coursez.map((course) => (
             <div
               key={course.id}
