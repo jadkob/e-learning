@@ -21,8 +21,8 @@
 }
 .input {
     border: black 1px solid;
-    padding-inline: 5vw;
-    font-size: 2rem;
+    padding-inline: 3vw;
+    font-size: 1.5rem;
     transition: all .2s ease-in-out;
 }
 .input:hover, .input:focus {
