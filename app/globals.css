@@ -24,10 +24,14 @@
     padding-inline: 3vw;
     font-size: 1.5rem;
     transition: all .2s ease-in-out;
+    text-align: center;
 }
 .input:hover, .input:focus {
     color: white;
     background-color: black;
+}
+.input::placeholder {
+    text-align: center;
 }
 .input:hover::placeholder, .input:focus::placeholder {
     color: white;
