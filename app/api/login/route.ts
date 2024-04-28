@@ -11,7 +11,10 @@ export async function POST(req: Request) {
     });
     if (user) {
       if (await bcrypt.compare(password, user.password)) {
-        const token = jwt.sign({ username: user.username }, "secret");
+        const token = jwt.sign(
+          { username: user.username, id: user.id },
+          "secret"
+        );
         return Response.json(token, { status: 200 });
       } else {
         return new Response("Password is incorrect", { status: 400 });
