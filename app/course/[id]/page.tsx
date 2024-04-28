@@ -26,7 +26,7 @@ export default function CourseFunc() {
       ) : (
         <div className="flex flex-col w-full h-screen items-center justify-center">
           <iframe
-            className="w-[80%] h-[80%]"
+            className="w-[80%] h-[90%]"
             src={course?.ytLink !== "" ? course?.ytLink : ""}
           ></iframe>
           <h1 className="text-[2rem]">Title: {course?.title}</h1>
