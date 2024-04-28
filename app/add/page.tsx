@@ -5,6 +5,8 @@ import { useRef, useState } from "react";
 import Nav from "../Nav";
 import axios from "axios";
 import { getCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
+import Loading from "../loadingComp";
 
 export default function Add() {
   const [loading, setLoading] = useState(false);
@@ -13,42 +15,59 @@ export default function Add() {
   const author = useRef<HTMLInputElement>(null);
   const subject = useRef<HTMLInputElement>(null);
   const ytLink = useRef<HTMLInputElement>(null);
+  const router = useRouter();
   return (
     <>
       <Nav />
-      <form
-        onSubmit={(e) => {
-          axios
-            .post(
-              "/api/courses",
-              {
-                title,
-                author,
-                subject,
-              },
-              {
-                headers: {
-                  Authorization: `Bearer ${getCookie("token")}`,
+      {loading ? (
+        <Loading />
+      ) : (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            setLoading(true);
+            axios
+              .post(
+                "/api/courses",
+                {
+                  title: title.current?.value,
+                  author: author.current?.value,
+                  subject: subject.current?.value,
+                  ytLink: ytLink.current?.value,
                 },
-              }
-            )
-            .then((res) => {
-              alert("Added");
-            })
-            .catch((err) => {
-              alert("Error");
-            });
-        }}
-        className="flex flex-col gap-[2vh] items-center"
-      >
-        <Input placeholder="Title" ref={title} className="w-fit px-[5vw]" />
-        <Input placeholder="Author" ref={author} className="w-fit px-[5vw]" />
-        <Input placeholder="Subject" ref={subject} className="w-fit px-[5vw]" />
-        <Input placeholder="YtLink" className="w-fit px-[5vw]" ref={ytLink} />
-        <Button type="submit" className="px-[5vw] text-[1.3rem]">
-          Add
-        </Button>
-      </form>
+                {
+                  headers: {
+                    Authorization: `Bearer ${getCookie("token")}`,
+                  },
+                }
+              )
+              .then((res) => {
+                alert("Added");
+                router.push("/home");
+              })
+              .catch((err) => {
+                console.log(err.response);
+
+                setMessage(err.response.data);
+              })
+              .finally(() => setLoading(false));
+          }}
+          className="flex flex-col gap-[2vh] items-center"
+        >
+          {message && <h1>{message}</h1>}
+          <Input placeholder="Title" ref={title} className="w-fit px-[5vw]" />
+          <Input placeholder="Author" ref={author} className="w-fit px-[5vw]" />
+          <Input
+            placeholder="Subject"
+            ref={subject}
+            className="w-fit px-[5vw]"
+          />
+          <Input placeholder="YtLink" className="w-fit px-[5vw]" ref={ytLink} />
+          <Button type="submit" className="px-[5vw] text-[1.3rem]">
+            Add
+          </Button>
+        </form>
+      )}
     </>
   );
 }

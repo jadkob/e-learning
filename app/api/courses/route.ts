@@ -23,6 +23,18 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   try {
     const { title, ytLink, subject, author } = await req.json();
+    if (
+      !title ||
+      !ytLink ||
+      !subject ||
+      !author ||
+      title == "" ||
+      ytLink == "" ||
+      subject == "" ||
+      author == ""
+    ) {
+      return new Response("Missing required fields", { status: 400 });
+    }
     const course = await prisma.course.create({
       data: { title, ytLink, subject, author },
     });
