@@ -35,7 +35,7 @@ export default function Home() {
       {loading ? <Loading /> : <div>{message && <h1>{message}</h1>}</div>}
       <div className="w-full flex flex-col gap-[5vh] items-center">
         {courses.map((course) => (
-          <div className="flex flex-col items-center gap-[3vh]">
+          <div key={course.id} className="flex flex-col items-center gap-[3vh]">
             <img
               src={`http://img.youtube.com/vi/${getId(course.ytLink)}/0.jpg`}
               alt="Youtube Thumbnail"
