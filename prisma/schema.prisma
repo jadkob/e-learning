@@ -19,17 +19,12 @@ model User {
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  posts     Course[]
 }
 
 model Course {
-  id        Int      @id @default(sequence())
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int
-  title     String
-  text      String
-  ytLink    String
-  subject   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id      Int    @id @default(sequence())
+  author  String
+  title   String
+  subject String
+  ytLink  String
 }

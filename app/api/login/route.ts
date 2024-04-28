@@ -1,12 +1,9 @@
-import { prisma } from "@/app/prisma";
-import * as bcrypt from "bcrypt";
+import { prisma } from "../prisma";
 import * as jwt from "jsonwebtoken";
+import * as bcrypt from "bcrypt";
 export async function POST(req: Request) {
   try {
     const { username, password } = await req.json();
-    if (!username || !password) {
-      return new Response("Username and password required", { status: 400 });
-    }
     const user = await prisma.user.findUnique({
       where: {
         username,
@@ -14,19 +11,13 @@ export async function POST(req: Request) {
     });
     if (user) {
       if (await bcrypt.compare(password, user.password)) {
-        const token = jwt.sign(
-          { userId: user.id, username: username },
-          "secret"
-        );
-        return Response.json({
-          message: "loggedIn",
-          token,
-        });
+        const token = jwt.sign({ username: user.username }, "secret");
+        return Response.json(token, { status: 200 });
       } else {
-        return new Response("Invalid credentials", { status: 400 });
+        return new Response("Password is incorrect", { status: 400 });
       }
     } else {
-      return new Response("Invalid credentials", { status: 400 });
+      return new Response("Username is incorrect", { status: 404 });
     }
   } catch (error: any) {
     return new Response(error.message, { status: 500 });

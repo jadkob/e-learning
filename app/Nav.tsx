@@ -1,32 +1,27 @@
 import Link from "next/link";
 import * as jwt from "jsonwebtoken";
 import { deleteCookie, getCookie } from "cookies-next";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 export default function Nav() {
-  const decoded: any = jwt.decode(getCookie("token")!);
-  const [username, setUsername] = useState("");
+  const token = getCookie("token");
+  const [username, setUsername] = useState<string>("");
   const router = useRouter();
   useEffect(() => {
-    if (!getCookie("token")) {
-      alert("Please login");
-      router.push("/");
-    } else {
-      setUsername(decoded.username);
-    }
+    const decoded: any = jwt.decode(token as string);
+    setUsername(decoded?.username);
   }, []);
   return (
-    <nav className="flex justify-center gap-[10vw] mb-[5vh]">
-      <Link href="/home">Home</Link>
-      {username == "admin" && <Link href="/add">Add</Link>}
+    <nav className="mb-[10vh] flex justify-center gap-[10vw]">
+      <Link href={"/home"}>Home</Link>
+      {username == "admin" && <Link href={"/add"}>Add</Link>}
       <button
         onClick={() => {
           deleteCookie("token");
-          deleteCookie("username");
           router.push("/");
         }}
       >
-        LogOut
+        Logout
       </button>
     </nav>
   );
