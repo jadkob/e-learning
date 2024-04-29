@@ -54,7 +54,7 @@ export default function CourseFunc() {
       {loading ? (
         <Loading />
       ) : (
-        <div className="flex flex-col w-full h-screen items-center justify-center">
+        <div className="flex flex-col w-full h-screen items-center ">
           <iframe className="w-[80%] h-[90%]" src={course?.ytLink}></iframe>
           <h1 className="text-[2rem]">Title: {course?.title}</h1>
           <h2 className="text-[1.5rem]">Author: {course?.author}</h2>
@@ -96,7 +96,7 @@ export default function CourseFunc() {
             />
             <Button>Add Review</Button>
           </form>
-          <div className="flex flex-col items-center justify-center gap-[5vh]">
+          <div className="flex flex-col items-center gap-[5vh]">
             {reviews.map((review) => (
               <div key={review.id}>
                 <h1 className="text-[2rem]">Stars: {review.stars}</h1>
