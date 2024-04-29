@@ -24,7 +24,7 @@ export default function Signup() {
       setCookie("token", res.data);
       router.push("/home");
     } catch (error: any) {
-      setMessage(error.message);
+      setMessage(error.response.data);
     } finally {
       setLoading(false);
     }
