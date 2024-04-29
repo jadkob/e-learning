@@ -55,7 +55,7 @@ export default function CourseFunc() {
         <Loading />
       ) : (
         <div className="flex flex-col w-full h-screen items-center ">
-          <iframe className="w-[80%] h-[120%]" src={course?.ytLink}></iframe>
+          <iframe className="w-[70%] h-[50%]" src={course?.ytLink}></iframe>
           <h1 className="text-[2rem] text-center">Title: {course?.title}</h1>
           <h2 className="text-[1.5rem] text-center">
             Author: {course?.author}
