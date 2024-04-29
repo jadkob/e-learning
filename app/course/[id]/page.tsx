@@ -55,11 +55,17 @@ export default function CourseFunc() {
         <Loading />
       ) : (
         <div className="flex flex-col w-full h-screen items-center ">
-          <iframe className="w-[80%] h-[90%]" src={course?.ytLink}></iframe>
-          <h1 className="text-[2rem]">Title: {course?.title}</h1>
-          <h2 className="text-[1.5rem]">Author: {course?.author}</h2>
-          <h3 className="text-[1.3rem]">Subject: {course?.subject}</h3>
-          <h1 className="mt-[10vh] text-[2rem] font-bold">Reviews: </h1>
+          <iframe className="w-[80%] h-[120%]" src={course?.ytLink}></iframe>
+          <h1 className="text-[2rem] text-center">Title: {course?.title}</h1>
+          <h2 className="text-[1.5rem] text-center">
+            Author: {course?.author}
+          </h2>
+          <h3 className="text-[1.3rem] text-center">
+            Subject: {course?.subject}
+          </h3>
+          <h1 className="mt-[10vh] text-[2rem] font-bold text-center">
+            Reviews:{" "}
+          </h1>
           <form
             className="flex flex-col items-center mb-[5vh]"
             onSubmit={(e) => {
