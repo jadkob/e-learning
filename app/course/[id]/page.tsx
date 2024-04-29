@@ -21,7 +21,7 @@ export default function CourseFunc() {
   const stars = useRef<HTMLInputElement>(null);
   const token = getCookie("token");
   const decoded: any = jwt.decode(token as string);
-  const userId = decoded.id;
+  const username = decoded.username;
   const getReviews = () => {
     axios
       .post(
@@ -78,7 +78,7 @@ export default function CourseFunc() {
                   "/api/reviews",
                   {
                     courseId: course?.id,
-                    authorId: userId,
+                    username,
                     title: title.current?.value,
                     text: text.current?.value,
                     stars: stars.current?.value,
@@ -108,9 +108,18 @@ export default function CourseFunc() {
           <div className="flex flex-col items-center gap-[5vh]">
             {reviews.map((review) => (
               <div key={review.id}>
-                <h1 className="text-[2rem]">Stars: {review.stars}</h1>
-                <h1 className="text-[1.5rem]">Title: {review.titlle}</h1>
-                <h2 className="text-[1.5rem]">Text: {review.text}</h2>
+                <h1 className="text-[2rem] break-all max-w-[70vw]">
+                  Username: {review.username}
+                </h1>
+                <h1 className="text-[2rem] break-all max-w-[70vw]">
+                  Stars: {review.stars}
+                </h1>
+                <h1 className="text-[1.5rem] break-all max-w-[70vw]">
+                  Title: {review.titlle}
+                </h1>
+                <h2 className="text-[1.5rem] break-all max-w-[70vw]">
+                  Text: {review.text}
+                </h2>
               </div>
             ))}
           </div>
