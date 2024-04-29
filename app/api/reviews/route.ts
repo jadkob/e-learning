@@ -43,7 +43,7 @@ export async function POST(req: Request) {
       data: {
         titlle: title,
         text,
-        stars,
+        stars: Number(stars),
         author: {
           connect: { username: existingUser.username }, // Connect to the user by username
         },
