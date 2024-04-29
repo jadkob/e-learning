@@ -18,6 +18,7 @@ export async function POST(req: Request) {
         titlle: title,
         courseId,
         text,
+        stars,
       },
     });
     if (review) {

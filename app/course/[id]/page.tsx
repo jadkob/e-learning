@@ -18,6 +18,7 @@ export default function CourseFunc() {
   const { id } = useParams();
   const title = useRef<HTMLInputElement>(null);
   const text = useRef<HTMLInputElement>(null);
+  const stars = useRef<HTMLInputElement>(null);
   const token = getCookie("token");
   const decoded: any = jwt.decode(token as string);
   const userId = decoded.id;
@@ -71,6 +72,7 @@ export default function CourseFunc() {
                     authorId: userId,
                     title: title.current?.value,
                     text: text.current?.value,
+                    stars: stars.current?.value,
                   },
                   {
                     headers: {
@@ -86,6 +88,12 @@ export default function CourseFunc() {
           >
             <Input placeholder="Title" ref={title} className="px-[5vw] w-fit" />
             <Input placeholder="Text" ref={text} className="px-[5vw] w-fit" />
+            <Input
+              placeholder="Rating"
+              className="px-[5vw] w-fit"
+              type="number"
+              ref={stars}
+            />
             <Button>Add Review</Button>
           </form>
           <div className="flex flex-col items-center justify-center gap-[5vh]">
