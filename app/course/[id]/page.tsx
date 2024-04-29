@@ -55,7 +55,7 @@ export default function CourseFunc() {
         <Loading />
       ) : (
         <div className="flex flex-col w-full h-screen items-center justify-center">
-          <video className="w-[80%] h-[90%]" src={course?.ytLink}></video>
+          <iframe className="w-[80%] h-[90%]" src={course?.ytLink}></iframe>
           <h1 className="text-[2rem]">Title: {course?.title}</h1>
           <h2 className="text-[1.5rem]">Author: {course?.author}</h2>
           <h3 className="text-[1.3rem]">Subject: {course?.subject}</h3>
@@ -99,6 +99,7 @@ export default function CourseFunc() {
           <div className="flex flex-col items-center justify-center gap-[5vh]">
             {reviews.map((review) => (
               <div key={review.id}>
+                <h1 className="text-[2rem]">Stars: {review.stars}</h1>
                 <h1 className="text-[1.5rem]">Title: {review.titlle}</h1>
                 <h2 className="text-[1.5rem]">Text: {review.text}</h2>
               </div>
